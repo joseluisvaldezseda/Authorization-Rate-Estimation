@@ -106,7 +106,7 @@ opportunity_df = filtered_df[
 # -----------------------------------------------------------------------------
 
 # Header
-st.title("Credit Portfolio Expansion Intelligence")
+st.title("Credit Expansion Intelligence")
 st.markdown(f"**Strategic Analysis for:** {selected_state} {'/ ' + selected_muni if selected_muni != 'All Municipalities' else ''}")
 
 # Top Level KPIs
@@ -240,4 +240,5 @@ with tab3:
     
     #### Data Engineering Note
     Data is processed via ETL pipelines extracting granular metrics at the 'Colonia' level across Mexico, ensuring specific targeting rather than broad municipal generalizations.
+
     """)
