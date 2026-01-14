@@ -1,97 +1,129 @@
-# Credit Authorization Rate Prediction
+# Credit Expansion Intelligence
 
-This project analyzes and predicts credit authorization rates based on INEGI variables, classifying them into three categories: Low, Medium, and High authorization rates. The implementation uses various machine learning models to achieve this classification.
+A dual-model machine learning system for strategic credit portfolio optimization in Mexico, providing granular risk assessment and market penetration analysis at the neighborhood level.
 
-## Project Overview
+## Live Demo
 
-The notebook performs the following key tasks:
+**[View Application](https://risk-rate-estimation.streamlit.app/)**
 
-1. **Data Analysis**:
-   - Examines class imbalance in the authorization rate categories
-   - Visualizes the distribution of authorization rates across different states
-   - Provides frequency and percentage breakdown of each authorization rate class
+## Overview
 
-2. **Machine Learning Implementation**:
-   - Utilizes multiple ML models to predict authorization rates
-   - Evaluates model performance
-   - Generates predictions for credit authorization likelihood
+This application combines two independent classification models to deliver actionable intelligence for credit expansion strategies:
 
-## Data Description
+- **Credit Risk Model**: Predicts default probability using socio-demographic indicators
+- **Authorization Rate Model**: Estimates market penetration and approval likelihood
 
-The dataset contains:
-- Credit authorization classifications (Low, Medium, High)
-- Geographic distribution across Mexican states
-- Various predictive features from INEGI (Mexican National Institute of Statistics and Geography)
+The system operates at the colonia (neighborhood) level, enabling precise geographic targeting rather than broad municipal generalizations.
 
-## Models Utilized
+## Features
 
-The notebook employs several machine learning models, including:
+**Strategy Matrix**
+- Risk vs. Growth quadrant analysis
+- Visual identification of expansion zones
+- Top opportunity rankings by composite score
 
-1. **Logistic Regression**:
-   - Baseline classification model
-   - Handles multi-class classification through one-vs-rest approach
+**Granular Explorer**
+- Detailed neighborhood-level data
+- Risk distribution analytics
+- Authorization potential metrics
 
-2. **Random Forest**:
-   - Ensemble method using multiple decision trees
-   - Effective for handling imbalanced data through class weighting
+**Dynamic Filtering**
+- Cascading geographic selection (State → Municipality)
+- Customizable probability thresholds
+- Real-time data updates
 
-3. **Gradient Boosting (XGBoost or similar)**:
-   - Sequential tree-building approach that corrects previous errors
-   - Often provides high accuracy for classification tasks
+## Technical Stack
 
-4. **Support Vector Machines (SVM)**:
-   - Effective for high-dimensional spaces
-   - Can handle non-linear decision boundaries with kernel tricks
+- **Framework**: Streamlit
+- **Visualization**: Plotly Express & Graph Objects
+- **ML Models**: XGBoost (saved as `.pkl`)
+- **Data Processing**: Pandas, NumPy
 
-5. **Neural Networks**:
-   - Deep learning approach for complex pattern recognition
-   - Uses multiple hidden layers to learn hierarchical representations
+## Model Architecture
 
-## Key Visualizations
+### Risk Classification Model
+- **Output**: Three-class probabilities (Low, Medium, High Risk)
+- **Application**: Credit limit optimization and interest rate calibration
 
-The notebook includes several important visualizations:
+### Authorization Rate Model
+- **Output**: Binary probability (High vs. Low authorization rate)
+- **Application**: Marketing resource allocation and conversion forecasting
 
-1. **Class Distribution**:
-   - Bar plot showing frequency of Low, Medium, and High authorization rates
-   - Reveals potential class imbalance that may need addressing
+### Composite Scoring
+```
+Opportunity_Score = (Prob_Low_Risk × 0.6) + (Prob_High_Auth × 0.4)
+```
 
-2. **Geographic Distribution**:
-   - Table showing number of credit applications by state
-   - Identifies states with highest/lowest application volumes
+## Data Structure
+
+The application processes `tasa_autorizacion_riesgo_predicho.csv` with the following key fields:
+
+- Geographic identifiers (State, Municipality, Locality, Neighborhood)
+- Risk probabilities (High, Medium, Low)
+- Authorization probabilities (High, Low)
+- Predicted classifications
+
+## Installation
+
+```bash
+git clone https://github.com/joseluisvaldezseda/risk-rate-estimation.git
+cd risk-rate-estimation
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+## Requirements
+
+```
+streamlit
+pandas
+plotly
+numpy
+scikit-learn
+xgboost
+```
 
 ## Usage
 
-To run this analysis:
+1. Select geographic scope using sidebar filters
+2. Adjust probability thresholds to define opportunity criteria
+3. Analyze results through three analytical views:
+   - Strategy Matrix for portfolio positioning
+   - Granular Explorer for detailed neighborhood data
+   - Model Logic for methodology transparency
 
-1. Ensure you have the required dependencies installed:
-   - pandas
-   - seaborn
-   - matplotlib
-   - scikit-learn
-   - xgboost (if using gradient boosting)
-   - tensorflow/pytorch (if using neural networks)
+## File Structure
 
-2. Load your dataset (replace "Prueba final PoC Gain Dynamics.csv" with your data)
+```
+.
+├── app.py                                    # Main application
+├── tasa_autorizacion_riesgo_predicho.csv    # Predictions dataset
+├── modelo_xgboost_optimizado.pkl            # Trained model
+├── label_encoder.pkl                         # Encoding artifacts
+├── Modelo Tasa de Autorizacion.ipynb        # Model development notebook
+├── requirements.txt                          # Dependencies
+└── README.md                                 # Documentation
+```
 
-3. Execute the notebook cells sequentially
+## Data Engineering
 
-## Results Interpretation
+- **Granularity**: Colonia-level analysis across Mexico
+- **ETL Pipeline**: Automated extraction of socio-demographic metrics
+- **Encoding**: Latin-1 to UTF-8 conversion for proper Spanish character handling
 
-The models generate:
-- Classification metrics (accuracy, precision, recall, F1-score)
-- Feature importance rankings
-- Probability estimates for each authorization rate class
+## Business Applications
 
-## Recommendations
+- Credit product expansion planning
+- Risk-adjusted pricing strategies
+- Geographic marketing optimization
+- Portfolio diversification analysis
 
-1. Address class imbalance if present (Medium appears dominant in visualization)
-2. Consider feature engineering to enhance predictive power
-3. Experiment with different model hyperparameters for optimization
-4. Evaluate model performance on unseen test data
+## Author
 
-## Future Improvements
+**JV.DATA**
 
-1. Implement more sophisticated handling of imbalanced data
-2. Add feature importance analysis
-3. Include model comparison metrics
-4. Develop deployment pipeline for production use
+Built with dual-model classification architecture for strategic credit intelligence.
+
+## License
+
+This project is available for educational and commercial use.
