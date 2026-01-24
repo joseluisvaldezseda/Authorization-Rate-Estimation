@@ -4,7 +4,7 @@ A dual-model machine learning system for strategic credit portfolio optimization
 
 ## Live Demo
 
-**[View Application](https://risk-rate-estimation.streamlit.app/)**
+**[View Application](https://apporization-rate-estimation.streamlit.app/)**
 
 ## Overview
 
